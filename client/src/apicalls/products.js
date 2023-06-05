@@ -13,32 +13,38 @@ export const AddProduct = async (payload) => {
   }
 };
 
-
-
 // get all products
-export const GetProducts = async(filters) => {
-    try {
-        const response = await axiosInstance.post("/api/products/get-products", filters);
-        return response.data;
-    } catch (error) {
-        return error.message;
-    }
-}
-
-// edit a product
-export const EditProduct = async(id, payload) => {
+export const GetProducts = async (filters) => {
   try {
-    const response = await axiosInstance.put(`/api/products/edit-product/${id}`, payload);
+    const response = await axiosInstance.post(
+      "/api/products/get-products",
+      filters
+    );
     return response.data;
   } catch (error) {
     return error.message;
   }
-}
+};
+
+// edit a product
+export const EditProduct = async (id, payload) => {
+  try {
+    const response = await axiosInstance.put(
+      `/api/products/edit-product/${id}`,
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};
 
 // get a product by id
-export const GetProductById = async(id) => {
+export const GetProductById = async (id) => {
   try {
-    const response = await axiosInstance.get(`/api/products/get-product-by-id/${id}`);
+    const response = await axiosInstance.get(
+      `/api/products/get-product-by-id/${id}`
+    );
     return response.data;
   } catch (error) {
     return error.message;
@@ -46,14 +52,16 @@ export const GetProductById = async(id) => {
 };
 
 // delete a product
-export const DeleteProduct = async(id) => {
+export const DeleteProduct = async (id) => {
   try {
-    const response = await axiosInstance.delete(`/api/products/delete-product/${id}`);
+    const response = await axiosInstance.delete(
+      `/api/products/delete-product/${id}`
+    );
     return response.data;
   } catch (error) {
     return error.message;
   }
-}
+};
 
 // upload a image
 export const UploadProductImage = async (payload) => {
@@ -93,8 +101,6 @@ export const PlaceNewBid = async (payload) => {
     return error.message;
   }
 };
-
-
 
 // get all bids
 export const GetAllBids = async (filters) => {
