@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-// const dotenv = require("dotenv");
-// dotenv.config();
+const dotenv = require("dotenv");
+dotenv.config();
 
-mongoose.connect('mongodb+srv://namanhiran:QJdDfPvfMLQWCJLN@cluster0.srdr37i.mongodb.net/watchrev?retryWrites=true&w=majority', {useNewUrlParser: true});
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true});
 
 const connection = mongoose.connection;
 

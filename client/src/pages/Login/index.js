@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Input, message } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import wristwatchImage from "../../assets/wristwatch.png";
-import {LoginUser} from "../../api/users";
+import {LoginUser} from "../../apicalls/users";
 
 const rules = [
   {
@@ -12,12 +12,14 @@ const rules = [
 ];
 
 const Login = () => {
+  const navigate = useNavigate();
   const onFinish = async (values) => {
     try {
       const response = await LoginUser(values);
-      if(response.success){
+      if (response.success) {
         message.success(response.message);
         localStorage.setItem("token", response.data);
+        window.location.href = "/";
       }else{
         throw new Error(response.message);
       }
@@ -25,6 +27,13 @@ const Login = () => {
       message.error(error.message);
     }
   };
+
+  useEffect(() => {
+    if(localStorage.getItem("token")){
+      navigate("/");
+    }
+  }, []);
+  
   return (
     <div className="h-screen bg-primary flex justify-center items-center">
       <div className="bg-white p-5 rounded w-[450px]">
