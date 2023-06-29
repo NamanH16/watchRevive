@@ -7,18 +7,24 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 15px;
 }
 
-input{
-    height: 45px !important;
+input, select, textarea{
+    min-height: 45px !important;
     border: 1px solid #b9b9b9 !important;
+    width: 100% !important;
 }
 
-input:focus{
+input:focus, textarea:focus, select:focus{
     outline:1px solid #40513B !important;
 }
 
 button{
     height: 45px !important;
+}
+
+i{
+    font-size: 20px !important;
 }
