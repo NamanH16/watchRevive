@@ -47,11 +47,11 @@ function Products() {
       dataIndex: "name",
     },
     {
-        title: "Seller",
-        dataIndex: "name",
-        render: (text, record) => {
-            return record.seller.name;
-        },
+      title: "Seller",
+      dataIndex: "name",
+      render: (text, record) => {
+        return record.seller.name;
+      },
     },
     {
       title: "Description",
@@ -80,51 +80,52 @@ function Products() {
     {
       title: "Added on",
       dataIndex: "createdAt",
-      render: (text, record) => moment(record.createdAt).format("DD-MM-YYYY hh:mm A"),
+      render: (text, record) =>
+        moment(record.createdAt).format("DD-MM-YYYY hh:mm A"),
     },
     {
-        title: "Action",
-        dataIndex: "action",
-        render: (text, record) => {
-          const { status, _id } = record;
-          return (
-            <div className="flex gap-3">
-              {status === "pending" && (
-                <span
-                  className="underline cursor-pointer"
-                  onClick={() => onStatusUpdate(_id, "approved")}
-                >
-                  Approve
-                </span>
-              )}
-              {status === "pending" && (
-                <span
-                  className="underline cursor-pointer"
-                  onClick={() => onStatusUpdate(_id, "rejected")}
-                >
-                  Reject
-                </span>
-              )}
-              {status === "approved" && (
-                <span
-                  className="underline cursor-pointer"
-                  onClick={() => onStatusUpdate(_id, "blocked")}
-                >
-                  Block
-                </span>
-              )}
-              {status === "blocked" && (
-                <span
-                  className="underline cursor-pointer"
-                  onClick={() => onStatusUpdate(_id, "approved")}
-                >
-                  Unblock
-                </span>
-              )}
-            </div>
-          );
-        },
+      title: "Action",
+      dataIndex: "action",
+      render: (text, record) => {
+        const { status, _id } = record;
+        return (
+          <div className="flex gap-3">
+            {status === "pending" && (
+              <span
+                className="underline cursor-pointer"
+                onClick={() => onStatusUpdate(_id, "approved")}
+              >
+                Approve
+              </span>
+            )}
+            {status === "pending" && (
+              <span
+                className="underline cursor-pointer"
+                onClick={() => onStatusUpdate(_id, "rejected")}
+              >
+                Reject
+              </span>
+            )}
+            {status === "approved" && (
+              <span
+                className="underline cursor-pointer"
+                onClick={() => onStatusUpdate(_id, "blocked")}
+              >
+                Block
+              </span>
+            )}
+            {status === "blocked" && (
+              <span
+                className="underline cursor-pointer"
+                onClick={() => onStatusUpdate(_id, "approved")}
+              >
+                Unblock
+              </span>
+            )}
+          </div>
+        );
       },
+    },
   ];
 
   useEffect(() => {
