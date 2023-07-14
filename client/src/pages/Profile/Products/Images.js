@@ -58,16 +58,6 @@ const Images = ({selectedProduct, setSelectedProduct, setShowProductForm, getDat
 
   return (
     <div>
-      
-      <Upload
-        listType='picture'
-        beforeUpload={()=>false}
-        onChange={(info)=>{
-          setFile(info.file);
-          setShowPreview(true);
-        }}
-        showUploadList={showPreview}
-      >
       <div className="flex gap-5 mb-5">
         {images.map((image) => {
           return (
@@ -81,6 +71,16 @@ const Images = ({selectedProduct, setSelectedProduct, setShowProductForm, getDat
           );
         })}
       </div>
+      
+      <Upload
+        listType='picture'
+        beforeUpload={()=>false}
+        onChange={(info)=>{
+          setFile(info.file);
+          setShowPreview(true);
+        }}
+        showUploadList={showPreview}
+      >
         <Button type='dashed'>Upload Image</Button>
       </Upload>
 
