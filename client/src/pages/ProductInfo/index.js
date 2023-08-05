@@ -32,7 +32,8 @@ function ProductInfo() {
   return (
     product && (
       <div>
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 gap-5">
+          {/*Images */}
           <div className="flex flex-col gap-5">
             <img
               src={product.images[selectedImageIndex]}
@@ -55,6 +56,22 @@ function ProductInfo() {
                   />
                 );
               })}
+            </div>
+
+
+          </div>
+
+          {/*details */}
+          <div className="flex flex-col gap-3">
+            <div>
+              <h1 className="text-2xl font-bold text-cyan-200">{product.name}</h1>
+              <span>
+                {product.description}
+              </span>
+            </div>
+            <Divider />
+            <div>
+              <h1 className="text-2xl font-semibold text-cyan-200">Product Details</h1>
             </div>
           </div>
         </div>
