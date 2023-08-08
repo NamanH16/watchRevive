@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { GetProducts, GetProductById } from "../../apicalls/products";
 import { SetLoader } from "../../redux/loadersSlice";
-import { message } from "antd";
+import { Button, message } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import Divider from "../../components/Divider";
 import moment from "moment";
+import BitModal from "./BitModal";
+import { set } from "mongoose";
 
 function ProductInfo() {
+  const [showAddNewBid, setShowAddNewBid] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [product, setProduct] = useState(null);
   const dispatch = useDispatch();
@@ -34,7 +37,7 @@ function ProductInfo() {
   return (
     product && (
       <div>
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-5 mt-5">
           {/*Images */}
           <div className="flex flex-col gap-5">
             <img
@@ -59,11 +62,18 @@ function ProductInfo() {
                 );
               })}
             </div>
+            <Divider />
+
+            <div>
+              <h1 className="text-gray-600">Added On</h1>
+              <span className="text-gray-600">
+                {moment(product.createdAt).format("MMM D , YYYY hh:mm A")}
+              </span>
+            </div>
           </div>
 
-
           {/*details */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 text-md">
             <div>
               <h1 className="text-2xl font-bold text-cyan-200">
                 {product.name}
@@ -123,8 +133,25 @@ function ProductInfo() {
                 <span> {product.seller.email}</span>
               </div>
             </div>
+            <Divider />
+            <div className="flex flex-col">
+              <div className="flex justify-between">
+                <h1 className="text-2xl font-semibold text-cyan-200">Bids</h1>
+                <Button onClick={() => setShowAddNewBid(!showAddNewBid)}>
+                  New Bid
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
+        {showAddNewBid && (
+          <BitModal
+            product={product}
+            reloadData={getData}
+            showBidModal={showAddNewBid}
+            setShowBidModal={setShowAddNewBid}
+          />
+        )}
       </div>
     )
   );
