@@ -107,9 +107,9 @@ function ProductsForm({ showProductForm, setShowProductForm , selectedProduct, g
                     <Form.Item label="Category" name="category" rules={rules}>
                       <select>
                         <option value="select">Select</option>
-                        <option value="electronics">Electronics</option>
-                        <option value="fashion">Fashion</option>
-                        <option value="home">Home</option>
+                        <option value="chronograph">Chronograph</option>
+                        <option value="swiss">Swiss</option>
+                        <option value="analog">Analog</option>
                         <option value="sports">Sports</option>
                       </select>
                     </Form.Item>

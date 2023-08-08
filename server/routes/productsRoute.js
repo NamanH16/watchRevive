@@ -61,7 +61,7 @@ router.put("/edit-product/:id", authMiddleware, async (req, res) => {
 // get a product by id
 router.get("/get-product-by-id/:id", async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate('seller');
     res.send({
       success: true,
       data: product,

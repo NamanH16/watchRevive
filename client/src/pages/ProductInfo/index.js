@@ -5,6 +5,7 @@ import { SetLoader } from "../../redux/loadersSlice";
 import { message } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import Divider from "../../components/Divider";
+import moment from "moment";
 
 function ProductInfo() {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -29,6 +30,7 @@ function ProductInfo() {
     getData();
   }, []);
 
+  console.log(product);
   return (
     product && (
       <div>
@@ -57,21 +59,69 @@ function ProductInfo() {
                 );
               })}
             </div>
-
-
           </div>
+
 
           {/*details */}
           <div className="flex flex-col gap-3">
             <div>
-              <h1 className="text-2xl font-bold text-cyan-200">{product.name}</h1>
-              <span>
-                {product.description}
-              </span>
+              <h1 className="text-2xl font-bold text-cyan-200">
+                {product.name}
+              </h1>
+              <span>{product.description}</span>
             </div>
             <Divider />
-            <div>
-              <h1 className="text-2xl font-semibold text-cyan-200">Product Details</h1>
+            <div className="flex flex-col">
+              <h1 className="text-2xl font-semibold text-cyan-200">
+                Product Details
+              </h1>
+              <div className="flex justify-between mt-2">
+                <span>Price</span>
+                <span>$ {product.price}</span>
+              </div>
+              <div className="flex justify-between mt-2">
+                <span>Category</span>
+                <span className="uppercase">{product.category}</span>
+              </div>
+              <div className="flex justify-between mt-2">
+                <span>Bill Available</span>
+                <span> {product.billAvailable ? "Yes" : "No"}</span>
+              </div>
+
+              <div className="flex justify-between mt-2">
+                <span>Box Available</span>
+                <span>{product.boxAvailable ? "Yes" : "No"}</span>
+              </div>
+              <div className="flex justify-between mt-2">
+                <span>Accessories Available</span>
+                <span>{product.accessoriesAvailable ? "Yes" : "No"}</span>
+              </div>
+
+              <div className="flex justify-between mt-2">
+                <span>Warranty Available</span>
+                <span>{product.warrantyAvailable ? "Yes" : "No"}</span>
+              </div>
+              <div className="flex justify-between mt-2">
+                <span>Purchased Year</span>
+                <span>
+                  {moment().subtract(product.age, "years").format("YYYY")} (
+                  {product.age} years ago)
+                </span>
+              </div>
+            </div>
+            <Divider />
+            <div className="flex flex-col">
+              <h1 className="text-2xl font-semibold text-cyan-200">
+                Seller Details
+              </h1>
+              <div className="flex justify-between mt-2">
+                <span>Name</span>
+                <span> {product.seller.name}</span>
+              </div>
+              <div className="flex justify-between mt-2">
+                <span>Email</span>
+                <span> {product.seller.email}</span>
+              </div>
             </div>
           </div>
         </div>
