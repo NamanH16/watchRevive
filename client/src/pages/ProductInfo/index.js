@@ -6,7 +6,7 @@ import { Button, message } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import Divider from "../../components/Divider";
 import moment from "moment";
-import BitModal from "./BitModal";
+import BidModal from "./BidModal";
 import { set } from "mongoose";
 
 function ProductInfo() {
@@ -145,7 +145,7 @@ function ProductInfo() {
           </div>
         </div>
         {showAddNewBid && (
-          <BitModal
+          <BidModal
             product={product}
             reloadData={getData}
             showBidModal={showAddNewBid}
