@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { GetProducts, GetProductById } from "../../apicalls/products";
+import { GetProducts, GetProductById, GetAllBids } from "../../apicalls/products";
 import { SetLoader } from "../../redux/loadersSlice";
 import { Button, message } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import Divider from "../../components/Divider";
 import moment from "moment";
 import BidModal from "./BidModal";
-import { set } from "mongoose";
 
 function ProductInfo() {
+  const {user} = useSelector(state => state.users);
   const [showAddNewBid, setShowAddNewBid] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [product, setProduct] = useState(null);
@@ -22,7 +22,11 @@ function ProductInfo() {
       const response = await GetProductById(id);
       dispatch(SetLoader(false));
       if (response.success) {
-        setProduct(response.data);
+        const bidsResponse = await GetAllBids({product: id});
+        setProduct({
+          ...response.data,
+          bids: bidsResponse.data,
+        });
       }
     } catch (error) {
       dispatch(SetLoader(false));
@@ -137,7 +141,9 @@ function ProductInfo() {
             <div className="flex flex-col">
               <div className="flex justify-between">
                 <h1 className="text-2xl font-semibold text-cyan-200">Bids</h1>
-                <Button onClick={() => setShowAddNewBid(!showAddNewBid)}>
+                <Button onClick={() => setShowAddNewBid(!showAddNewBid)}
+                  disabled={user._id === product.seller._id}
+                >
                   New Bid
                 </Button>
               </div>
