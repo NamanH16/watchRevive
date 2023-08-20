@@ -32,11 +32,14 @@ function Bids({ showBidsModal, setShowBidsModal, selectedProduct }) {
       dataIndex: "createdAt",
       render: (text, record) => {
         return moment(text).format("DD-MM-YYYY hh:mm a");
-      }
+      },
     },
     {
       title: "Name",
       dataIndex: "name",
+      render: (text, record) => {
+        return record.buyer.name;
+      },
     },
     {
       title: "Bid Amount",
@@ -53,7 +56,7 @@ function Bids({ showBidsModal, setShowBidsModal, selectedProduct }) {
       title: "Message",
       dataIndex: "message",
     },
-    
+
     {
       title: "Contact Details",
       dataIndex: "contactDetails",
